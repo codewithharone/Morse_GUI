@@ -1,0 +1,471 @@
+import RPi.GPIO as GPIO, time
+
+from tkinter import *
+
+window = Tk()
+
+window.geometry("500x100")
+
+window.title("Convert a 12 Letter String to Morse Code")
+
+# Whatever the user inputs will be stored into variable textInput
+
+textInput = StringVar()
+
+
+#Set LED Pin Number
+greenLED = 14 
+
+yellowLED= 15
+
+#unit length for morsecode
+unit = 0.6
+
+
+# setup the pin mode
+
+GPIO.setwarnings(False)
+
+GPIO.setmode(GPIO.BCM)
+
+GPIO.setup(greenLED, GPIO.OUT)
+GPIO.setup(yellowLED, GPIO.OUT)
+
+# blinks a dot dot is a shorter blink
+
+def dot():
+
+    GPIO.output(greenLED, True)
+
+    GPIO.output(yellowLED, True)
+
+    time.sleep(unit)
+
+    GPIO.output(greenLED, False)
+
+    GPIO.output(yellowLED, False)
+
+    time.sleep(unit)
+
+
+
+# blinks a dash dash is a longer blink
+
+def dash():
+
+    GPIO.output(greenLED, True)
+
+    GPIO.output(yellowLED, True)
+
+    time.sleep(unit*5)
+
+    GPIO.output(greenLED, False)
+
+    GPIO.output(yellowLED, False) 
+
+    time.sleep(unit)
+
+
+
+# longer break for a new character (3 units)
+
+def newCharacter():
+
+    time.sleep(unit*4)
+
+
+
+# functions for each letter of the alphabet this is the morse code for each letter 
+
+#LETTER A is dot and dash so we are calling each of the functions
+def A():
+
+    dot()
+
+    dash()
+
+
+#LETTER B is dash dot dot dot so we are calling each of the functions
+def B():
+
+    dash()
+
+    dot()
+
+    dot()
+
+    dot()
+
+#LETTER C is dash dot dash dot so we are calling each of the functions
+def C():
+
+    dash()
+
+    dot()
+
+    dash() 
+
+    dot()
+
+
+#LETTER D is dash dot dot so we are calling each of the functions
+def D():
+
+    dash()
+
+    dot()
+
+    dot()
+
+#LETTER E is dot so we are calling each of the functions
+def E():
+
+    dot()
+
+
+#LETTER F is dot dot dash dot so we are calling each of the functions
+def F():
+
+    dot()
+
+    dot()
+
+    dash()
+
+    dot()
+
+
+#LETTER G is dash dash dot so we are calling each of the functions
+def G():
+
+    dash()
+
+    dash()
+
+    dot()
+
+#LETTER H is dot dot dot dot so we are calling each of the functions
+def H():
+
+    dot()
+
+    dot()
+
+    dot()
+
+    dot()
+
+#LETTER I is dot dot so we are calling each of the functions
+def I():
+
+    dot()
+
+    dot()
+
+#LETTER J is dot dash dash dash so we are calling each of the functions
+def J():
+
+    dot()
+
+    dash()
+
+    dash()
+
+    dash()
+
+#LETTER K is dash dot dash so we are calling each of the functions
+def K():
+
+    dash()
+
+    dot()
+
+    dash()
+
+#LETTER L is dot dash dot dot so we are calling each of the functions
+def L():
+
+    dot()
+
+    dash()
+
+    dot()
+
+    dot()
+
+#LETTER M is dash dash so we are calling each of the functions
+def M():
+
+    dash()
+
+    dash()
+
+#LETTER N is dash dot so we are calling each of the functions
+def N():
+
+    dash()
+
+    dot()
+
+#LETTER O is dash dash dash so we are calling each of the functions
+def O():
+
+    dash()
+
+    dash()
+
+    dash()
+
+#LETTER P is dot dash dash dot so we are calling each of the functions
+def P():
+
+    dot()
+
+    dash()
+
+    dash()
+
+    dot()
+
+#LETTER Q is dash dash dot dash so we are calling each of the functions
+def Q():
+
+    dash()
+
+    dash()
+
+    dot()
+
+    dash()
+
+#LETTER R is dot dash dot so we are calling each of the functions
+def R():
+
+    dot()
+
+    dash()
+
+    dot()
+
+#LETTER S is dot dot dot so we are calling each of the functions
+def S():
+
+    dot()
+
+    dot()
+
+    dot()
+
+
+#LETTER T is dash so we are calling each of the functions
+def T():
+
+    dash()
+
+#LETTER U is dot dot dash so we are calling each of the functions
+def U():
+
+    dot()
+
+    dot()
+
+    dash()
+
+#LETTER V is dot dot dot dash so we are calling each of the functions
+def V():
+
+    dot()
+
+    dot()
+
+    dot()
+
+    dash()
+
+#LETTER W is dot dash dash so we are calling each of the functions
+def W():
+
+    dot()
+
+    dash()
+
+    dash()
+
+#LETTER X is dash dot dot dash so we are calling each of the functions
+def X():
+
+    dash()
+
+    dot()
+
+    dot()
+
+    dash()
+
+
+#LETTER Y is dash dot dash dash so we are calling each of the functions
+def Y():
+
+    dash()
+
+    dot()
+
+    dash()
+
+    dash()
+
+#LETTER Z is dash dash dot dot so we are calling each of the functions
+def Z():
+
+    dash()
+
+    dash()
+
+    dot()
+
+    dot()
+
+
+
+# This is a loop so if the characters are greater than 12 it wont retun any action and these loops
+# will call each letter function defined above and perform the dots and dashses according to morse
+#code
+
+def convertTextToMorseCode():
+
+    MorseText = textInput.get()
+
+    if len(MorseText) > 12:
+        print("Please enter 12 characters or less")
+        return
+        
+
+    for i in MorseText:
+
+        if i.upper() == "A":
+
+            A()
+
+        elif i.upper() == "B":
+
+            B()
+
+        elif i.upper() == "C":
+
+            C()
+
+        elif i.upper() == "D":
+
+            D()
+
+        elif i.upper() == "E":
+
+            E()
+
+        elif i.upper() == "F":
+
+            F()
+
+        elif i.upper() == "G":
+
+            G()
+
+        elif i.upper() == "H":
+
+            H()
+
+        elif i.upper() == "I":
+
+            I()
+
+        elif i.upper() == "J":
+
+            J()
+
+        elif i.upper() == "K":
+
+            K()
+
+        elif i.upper() == "L":
+
+            L()
+
+        elif i.upper() == "M":
+
+            M()
+
+        elif i.upper() == "N":
+
+            N()
+
+        elif i.upper() == "O":
+
+            O()
+
+        elif i.upper() == "P":
+
+            P()
+
+        elif i.upper() == "Q":
+
+            Q()
+
+        elif i.upper() == "R":
+
+            R()
+
+        elif i.upper() == "S":
+
+            S()
+
+        elif i.upper() == "T":
+
+            T()
+
+        elif i.upper() == "U":
+
+            U()
+
+        elif i.upper() == "V":
+
+            V()
+
+        elif i.upper() == "W":
+
+            W()
+
+        elif i.upper() == "X":
+
+            X()
+
+        elif i.upper() == "Y":
+
+            Y()
+
+        elif i.upper() == "Z":
+
+            Z()
+
+        newCharacter()
+
+def close():
+    GPIO.cleanup()
+    window.destroy()
+
+textEntry = Entry(window, width=20,bg='orange', textvariable=textInput)
+
+convertButton = Button(window, text="Convert text to Morse Code",bg='pink', height =10, command=convertTextToMorseCode)
+
+exitButton = Button(window, text = 'Exit',command= close, bg = 'orange', height = 1, width = 6)
+
+
+
+textEntry.pack(side=LEFT)
+
+convertButton.pack(side=LEFT)
+exitButton.pack(side=LEFT)
+
+window.protocol("WM_DELETE_WINDOW",close)
+window.mainloop()
+
+
